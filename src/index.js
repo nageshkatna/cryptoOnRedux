@@ -5,10 +5,14 @@ import * as serviceWorker from './serviceWorker';
 import { createStore,applyMiddleware } from "redux";
 import {Provider} from "react-redux";
 import reducers from './reducers';
+import promiseMiddleware from "redux-promise";
+import 'semantic-ui-css/semantic.min.css';
 
-const store = createStore(reducers);
+const middleware= applyMiddleware(promiseMiddleware)(createStore)
 
-ReactDOM.render(<Provider store={store}>
+// const store = createStore(middleware,reducers);
+
+ReactDOM.render(<Provider store={middleware(reducers)}>
 <App /></Provider>
 , document.getElementById('root'));
 
